@@ -79,11 +79,27 @@ export function LucaChat({ onClose, user, onGoalCreated, onInvestFunds }: LucaCh
             <div className="w-12 h-12 rounded-full bg-linear-to-br from-mango-500 to-mango-700 flex items-center justify-center shadow-glow animate-pulse">
                <Sparkles className="text-white h-6 w-6" />
             </div>
-            <div className="space-y-2">
+            <div className="space-y-2 px-4">
               <h3 className="font-editorial text-[22px] font-bold text-neutral-50">Hablá con Luca.</h3>
-              <p className="max-w-[240px] font-body text-[14px] text-neutral-400 leading-relaxed italic">
+              <p className="max-w-[240px] mx-auto font-body text-[14px] text-neutral-400 leading-relaxed italic">
                  "Te voy a ayudar a proteger tus ahorros de la inflación — sin tecnicismos."
               </p>
+            </div>
+            <div className="flex flex-col space-y-2 w-full max-w-[280px] mt-4">
+              {[
+                "¿Cómo me protejo de la inflación?",
+                "¿Qué es un Fondo Común de Inversión?",
+                "Tengo $50.000, ¿qué me recomendás?",
+                "¿Qué son los CEDEARs?"
+              ].map((question, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => sendMessage(question)}
+                  className="bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 hover:border-mango-500/50 text-neutral-300 hover:text-mango-300 text-[13px] font-body py-2.5 px-4 rounded-full transition-all text-left truncate shadow-sm"
+                >
+                  {question}
+                </button>
+              ))}
             </div>
           </div>
         )}
