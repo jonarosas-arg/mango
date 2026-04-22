@@ -49,9 +49,11 @@ export function useLuca(
   const aiRef = useRef<GoogleGenAI | null>(null);
   const chatRef = useRef<any>(null);
 
-  if (!aiRef.current && typeof process !== 'undefined' && (process.env.GEMINI_API_KEY || (process.env as any).VITE_GEMINI_API_KEY)) {
-    const key = process.env.GEMINI_API_KEY || (process.env as any).VITE_GEMINI_API_KEY;
-    aiRef.current = new GoogleGenAI({ apiKey: key });
+  if (!aiRef.current) {
+    const key = import.meta.env.VITE_GEMINI_API_KEY || (typeof process !== 'undefined' ? process.env.GEMINI_API_KEY : undefined);
+    if (key) {
+      aiRef.current = new GoogleGenAI({ apiKey: key });
+    }
   }
 
   const sendMessage = useCallback(async (content: string) => {
